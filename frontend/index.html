@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinTrack</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>FinTrack</h1>
+    <p>Personal Expense Tracker</p>
+
+    <h2>Add Expense</h2>
+
+    <form id="expenseForm">
+        <input type="text" id="title" placeholder="Expense title" required>
+
+        <input type="number" id="amount" placeholder="Amount" step="0.01" required>
+
+        <input type="text" id="category" placeholder="Category" required>
+
+        <input type="date" id="expense_date" required>
+
+        <button type="submit">Add Expense</button>
+    </form>
+
+    <h2>Total Spending</h2>
+    <p id="total">₹0.00</p>
+
+    <h2>Expenses</h2>
+    <div id="expenseList"></div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
