@@ -1,0 +1,28 @@
+services:
+  database:
+    build: ./database
+    container_name: fintrack-database
+    environment:
+      POSTGRES_DB: fintrack
+      POSTGRES_USER: fintrack
+      POSTGRES_PASSWORD: fintrack123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend
+    container_name: fintrack-backend
+    environment:
+      DB_HOST: database
+      DB_NAME: fintrack
+      DB_USER: fintrack
+      DB_PASSWORD: fintrack123
+    ports:
+      - "5000:5000"
+    depends_on:
+      - database
+
+volumes:
+  postgres_data:
