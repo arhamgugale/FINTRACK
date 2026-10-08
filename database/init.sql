@@ -1,7 +1,28 @@
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
 CREATE TABLE IF NOT EXISTS expenses (
     id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     title VARCHAR(100) NOT NULL,
     amount DECIMAL(10, 2) NOT NULL,
     category VARCHAR(50) NOT NULL,
     expense_date DATE NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS goals (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    goal_month DATE NOT NULL,
+    monthly_income DECIMAL(10, 2) NOT NULL DEFAULT 0,
+    spending_limit DECIMAL(10, 2) NOT NULL DEFAULT 0,
+    saving_target DECIMAL(10, 2) NOT NULL DEFAULT 0,
+    UNIQUE(user_id, goal_month)
 );

@@ -1,37 +1,476 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>FinTrack</title>
-    <link rel="stylesheet" href="style.css">
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 <body>
 
-    <h1>FinTrack</h1>
-    <p>Personal Expense Tracker</p>
+    <!-- =========================
+         AUTH SECTION
+    ========================== -->
 
-    <h2>Add Expense</h2>
+    <div
+        id="authContainer"
+        class="auth-container"
+    >
 
-    <form id="expenseForm">
-        <input type="text" id="title" placeholder="Expense title" required>
+        <div class="auth-card">
 
-        <input type="number" id="amount" placeholder="Amount" step="0.01" required>
+            <h1>
+                FinTrack
+            </h1>
 
-        <input type="text" id="category" placeholder="Category" required>
+            <p>
+                Smart personal finance tracking
+            </p>
 
-        <input type="date" id="expense_date" required>
 
-        <button type="submit">Add Expense</button>
-    </form>
+            <!-- LOGIN -->
 
-    <h2>Total Spending</h2>
-    <p id="total">₹0.00</p>
+            <div id="loginSection">
 
-    <h2>Expenses</h2>
-    <div id="expenseList"></div>
+                <h2>
+                    Login
+                </h2>
 
-    <script src="script.js"></script>
+                <form id="loginForm">
+
+                    <input
+                        type="text"
+                        id="loginUsername"
+                        placeholder="Username"
+                        required
+                    >
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Password"
+                        required
+                    >
+
+                    <button type="submit">
+                        Login
+                    </button>
+
+                </form>
+
+                <p id="loginMessage"></p>
+
+                <button
+                    type="button"
+                    id="showRegister"
+                    class="secondary-button"
+                >
+                    Create Account
+                </button>
+
+            </div>
+
+
+            <!-- REGISTER -->
+
+            <div
+                id="registerSection"
+                class="hidden"
+            >
+
+                <h2>
+                    Create Account
+                </h2>
+
+                <form id="registerForm">
+
+                    <input
+                        type="text"
+                        id="registerUsername"
+                        placeholder="Username"
+                        required
+                    >
+
+                    <input
+                        type="email"
+                        id="registerEmail"
+                        placeholder="Email"
+                        required
+                    >
+
+                    <input
+                        type="password"
+                        id="registerPassword"
+                        placeholder="Password"
+                        required
+                    >
+
+                    <button type="submit">
+                        Register
+                    </button>
+
+                </form>
+
+                <p id="registerMessage"></p>
+
+                <button
+                    type="button"
+                    id="showLogin"
+                    class="secondary-button"
+                >
+                    Back to Login
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         DASHBOARD
+    ========================== -->
+
+    <div
+        id="dashboard"
+        class="hidden"
+    >
+
+        <!-- HEADER -->
+
+        <header class="dashboard-header">
+
+            <div>
+
+                <h1>
+                    FinTrack
+                </h1>
+
+                <p id="welcomeUser">
+                    Welcome
+                </p>
+
+            </div>
+
+            <button
+                id="logoutButton"
+                class="logout-button"
+            >
+                Logout
+            </button>
+
+        </header>
+
+
+
+        <main class="dashboard-container">
+
+
+            <!-- =========================
+                 SUMMARY CARDS
+            ========================== -->
+
+            <section class="summary-grid">
+
+                <div class="summary-card">
+
+                    <h3>
+                        Total Spending
+                    </h3>
+
+                    <p id="total">
+                        ₹0
+                    </p>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <h3>
+                        Monthly Goal
+                    </h3>
+
+                    <p id="goalAmount">
+                        ₹0
+                    </p>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <h3>
+                        Remaining
+                    </h3>
+
+                    <p id="remainingAmount">
+                        ₹0
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =========================
+                 MONTHLY GOAL
+            ========================== -->
+
+            <section class="dashboard-card">
+
+                <h2>
+                    Monthly Goal
+                </h2>
+
+                <form id="goalForm">
+
+                    <input
+                        type="number"
+                        id="monthlyIncome"
+                        placeholder="Monthly Income"
+                        min="0"
+                        step="0.01"
+                        required
+                    >
+
+                    <input
+                        type="number"
+                        id="spendingLimit"
+                        placeholder="Spending Limit"
+                        min="0"
+                        step="0.01"
+                        required
+                    >
+
+                    <input
+                        type="number"
+                        id="savingTarget"
+                        placeholder="Saving Target"
+                        min="0"
+                        step="0.01"
+                        required
+                    >
+
+                    <button type="submit">
+                        Save Goal
+                    </button>
+
+                </form>
+
+                <p id="goalMessage"></p>
+
+            </section>
+
+
+
+            <!-- =========================
+                 ADD EXPENSE
+            ========================== -->
+
+            <section class="dashboard-card">
+
+                <h2>
+                    Add Expense
+                </h2>
+
+                <form id="expenseForm">
+
+                    <input
+                        type="text"
+                        id="title"
+                        placeholder="Expense Title"
+                        required
+                    >
+
+                    <input
+                        type="number"
+                        id="amount"
+                        placeholder="Amount"
+                        min="0"
+                        step="0.01"
+                        required
+                    >
+
+                    <input
+                        type="text"
+                        id="category"
+                        placeholder="Category"
+                        required
+                    >
+
+                    <input
+                        type="date"
+                        id="expense_date"
+                        required
+                    >
+
+                    <button type="submit">
+                        Add Expense
+                    </button>
+
+                </form>
+
+            </section>
+
+
+
+            <!-- =========================
+                 SMART ALERTS
+            ========================== -->
+
+            <section class="dashboard-card">
+
+                <h2>
+                    Smart Alerts
+                </h2>
+
+                <div id="alertsContainer">
+
+                    <p>
+                        Checking your spending...
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =========================
+                 SMART RECOMMENDATIONS
+            ========================== -->
+
+            <section class="dashboard-card">
+
+                <h2>
+                    Smart Recommendations
+                </h2>
+
+                <div id="recommendationsContainer">
+
+                    <p>
+                        Analysing your spending...
+                    </p>
+
+                </div>
+
+            </section>
+            <section class="dashboard-card investment-card">
+    <h2>Investment & SIP Suggestions</h2>
+    <div id="investmentContainer">
+        <p>Analysing your savings...</p>
+    </div>
+</section>
+
+
+
+            <!-- =========================
+                 SPENDING ANALYTICS
+            ========================== -->
+
+            <section class="dashboard-card">
+
+                <h2>
+                    Spending Analytics
+                </h2>
+
+                <div class="charts-grid">
+
+
+                    <!-- CATEGORY CHART -->
+
+                    <div class="chart-container">
+
+                        <h3>
+                            Spending by Category
+                        </h3>
+
+                        <canvas id="categoryChart"></canvas>
+
+                    </div>
+
+
+                    <!-- MONTHLY CHART -->
+
+                    <div class="chart-container">
+
+                        <h3>
+                            Monthly Spending
+                        </h3>
+
+                        <canvas id="monthlyChart"></canvas>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =========================
+                 RECENT EXPENSES
+            ========================== -->
+
+            <section class="dashboard-card">
+
+                <h2>
+                    Recent Expenses
+                </h2>
+
+                <div id="expensesList">
+
+                    <p>
+                        No expenses yet.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+
+    <!-- =========================
+         CHART.JS
+    ========================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js"
+    ></script>
+
+
+    <!-- =========================
+         FINTRACK JAVASCRIPT
+    ========================== -->
+
+    <script
+        src="script.js"
+    ></script>
+
 
 </body>
+
 </html>
